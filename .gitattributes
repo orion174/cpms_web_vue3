@@ -1,0 +1,15 @@
+# 외부 라이브러리 무시 (node_modules 등)
+node_modules/** linguist-vendored
+
+# 스타일 파일은 통계에서 제외
+*.css linguist-vendored
+*.scss linguist-vendored
+*.sass linguist-vendored
+*.less linguist-vendored
+
+# Vue 파일은 Vue로 인식되므로 포함
+*.vue linguist-language=Vue
+
+# JS/TS 파일은 포함시키되 명시적으로 언어 지정
+*.js linguist-language=JavaScript
+*.ts linguist-language=TypeScript
