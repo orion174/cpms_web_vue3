@@ -1,58 +1,56 @@
 <template>
-  <button
-    class="btn mb-0"
-    :class="getClasses(variant, color, size, fullWidth, active)"
-  >
-    <slot />
-  </button>
+	<button class="btn mb-0" :class="getClasses">
+		<slot />
+	</button>
 </template>
 
-<script>
-export default {
-  name: "MaterialButton",
-  props: {
-    color: {
-      type: String,
-      default: "success",
-    },
-    size: {
-      type: String,
-      default: "md",
-    },
-    variant: {
-      type: String,
-      default: "fill",
-    },
-    fullWidth: {
-      type: Boolean,
-      default: false,
-    },
-    active: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  methods: {
-    getClasses: (variant, color, size, fullWidth, active) => {
-      let colorValue, sizeValue, fullWidthValue, activeValue;
+<script setup lang="ts">
+	import { computed } from 'vue';
 
-      // Setting the button variant and color
-      if (variant === "gradient") {
-        colorValue = `bg-gradient-${color}`;
-      } else if (variant === "outline") {
-        colorValue = `btn-outline-${color}`;
-      } else {
-        colorValue = `btn-${color}`;
-      }
+	const props = defineProps({
+		color: {
+			type: String,
+			default: 'success',
+		},
+		size: {
+			type: String,
+			default: 'md',
+		},
+		variant: {
+			type: String,
+			default: 'fill',
+		},
+		fullWidth: {
+			type: Boolean,
+			default: false,
+		},
+		active: {
+			type: Boolean,
+			default: false,
+		},
+	});
 
-      sizeValue = size ? `btn-${size}` : null;
+	// 클래스 계산
+	const getClasses = computed(() => {
+		let colorValue = '';
+		let sizeValue = '';
+		let fullWidthValue = '';
+		let activeValue = '';
 
-      fullWidthValue = fullWidth ? `w-100` : null;
+		if (props.variant === 'gradient') {
+			colorValue = `bg-gradient-${props.color}`;
 
-      activeValue = active ? `active` : null;
+		} else if (props.variant === 'outline') {
+			colorValue = `btn-outline-${props.color}`;
 
-      return `${colorValue} ${sizeValue} ${fullWidthValue} ${activeValue}`;
-    },
-  },
-};
+		} else {
+			colorValue = `btn-${props.color}`;
+		}
+
+		sizeValue = props.size ? `btn-${props.size}` : '';
+		fullWidthValue = props.fullWidth ? 'w-100' : '';
+		activeValue = props.active ? 'active' : '';
+
+		return [colorValue, sizeValue, fullWidthValue, activeValue].filter(Boolean).join(' ');
+	});
 </script>

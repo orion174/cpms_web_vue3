@@ -1,0 +1,215 @@
+.custom-text {
+    color: deepskyblue;
+    font-weight: bold;
+    font-size: 60px;
+}
+
+.custom-badge-request,
+.custom-badge-status {
+    font-size: 0.8rem !important;
+    padding: 0.75rem 1.25rem !important;
+    font-weight: bold !important;
+    border-radius: 0.5rem !important;
+    display: inline-block !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+}
+
+.custom-badge-request {
+    width: 80px !important;
+}
+
+.custom-badge-status {
+    width: 60px !important;
+}
+
+.my-file-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.check-button {
+    padding: 0.5rem 1rem;
+    line-height: 1;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 0.5rem;
+}
+
+.my-custom-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    padding: 8px 30px 8px 12px;
+    font-family: "Pretendard Variable", Pretendard, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1E1E1E;
+
+    background-image: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23333' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 10px;
+
+    cursor: pointer;
+}
+
+.my-input-text,
+.my-litepicker {
+    font-family: "Pretendard Variable", Pretendard, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1E1E1E !important;
+}
+
+.table-flush .my-input-text-thead {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: #4299E1 !important;
+    text-align: center;
+}
+
+.table-flush .col-type {
+    font-size: 14px !important;
+}
+
+.my-input-text-tbody {
+    font-family: "Pretendard Variable", Pretendard, sans-serif;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: #1E1E1E !important;
+    text-align: center !important;
+}
+
+.my-modal-header-text {
+    font-family: "Pretendard Variable", Pretendard, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #5e72e4 !important;
+}
+
+.my-modal-info-text {
+    font-family: "Pretendard Variable", Pretendard, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #3E4046 !important;
+}
+
+.input-group-dynamic {
+    display: flex;
+    align-items: center;
+    flex-grow: 0.2;
+}
+
+.input-group-dynamic-2date {
+    display: flex;
+    align-items: center;
+    flex-grow: 0.1;
+    max-width: 210px;
+}
+
+.input-title {
+    display: flex;
+    align-items: center;
+    flex-grow: 0.1;
+    max-width: 250px;
+}
+
+.text-editor__wrapper,
+.text-editor__wrapper_res {
+    width: 100% !important;
+    height: auto;
+    max-width: 100%;
+    min-height: 150px;
+    background-color: var(--color-white);
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.025);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #495057;
+}
+
+.my-div-custom,
+.my-detail-text {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    min-height: 40px;
+    background-color: var(--color-white);
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.025);
+    white-space: pre-wrap;
+    overflow: hidden;
+}
+
+.my-detail-text {
+    font-family: "Pretendard Variable", Pretendard, sans-serif;
+    font-size: 16px !important;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #495057;
+}
+
+.form-control-label-custom {
+    color: #525f7f;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.form-control-today {
+    font-family: "Pretendard Variable", Pretendard, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.my-detail-text-editor p {
+    color: #1E1E1E !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+}
+
+.section-space {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.button-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.res-form-container {
+    margin-top: 30px;
+}
+
+.custom-disabled-group .input-group-text {
+    background-color: #e9ecef !important;
+    color: #6c757d !important;
+    border: 0 solid #ced4da !important;
+    border-right: none !important;
+}
+
+.custom-disabled-group input {
+    background-color: #e9ecef !important;
+    color: #6c757d !important;
+    border: 0 solid #ced4da !important;
+    pointer-events: none;
+}
+
+.modal-dialog-custom {
+    max-width: 850px;
+    width: 100%;
+}

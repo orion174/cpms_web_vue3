@@ -13,7 +13,7 @@
         <div class="col-auto">
           <div class="avatar avatar-xl position-relative">
             <img
-              src="@/assets/img/bruce-mars.jpg"
+              src="../../assets/img/bruce-mars.jpg"
               alt="profile_image"
               class="shadow-sm w-100 border-radius-lg"
             />

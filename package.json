@@ -9,10 +9,6 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/vue-material-dashboard-2/issues"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/creativetimofficial/ct-vue-material-dashboard-2.git"
-  },
   "scripts": {
     "dev": "kill-port 5173 && vite",
     "build": "tsc -b && vite build",
@@ -23,9 +19,14 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@popperjs/core": "2.11.8",
+    "axios": "^1.10.0",
     "bootstrap": "5.3.2",
     "chart.js": "4.4.0",
     "core-js": "3.33.0",
+    "litepicker": "^2.0.12",
+    "pinia": "^3.0.3",
+    "sweetalert2": "^11.22.2",
+    "uuid": "^11.1.0",
     "vue-router": "4.2.5",
     "vuex": "4.1.0"
   },

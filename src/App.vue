@@ -1,68 +1,61 @@
-ㄴ<template>
-  <sidenav
-    :custom_class="color"
-    :class="[isRTL ? 'fixed-end' : 'fixed-start']"
-    v-if="showSidenav"
-  />
-  <main
-    class="main-content position-relative max-height-vh-100 h-100 overflow-x-hidden"
-  >
-    <!-- nav -->
-    <navbar
-      :class="[isNavFixed ? navbarFixed : '', isAbsolute ? absolute : '']"
-      :color="isAbsolute ? 'text-white opacity-8' : ''"
-      :minNav="navbarMinimize"
-      v-if="showNavbar"
-    />
-    <router-view />
-    <app-footer v-show="showFooter" />
-    <configurator
-      :toggle="toggleConfigurator"
-      :class="[showConfig ? 'show' : '', hideConfigButton ? 'd-none' : '']"
-    />
-  </main>
-</template>
-<script>
-import Sidenav from "./examples/Sidenav/index.vue";
-import Configurator from "@/examples/Configurator.vue";
-import Navbar from "@/examples/Navbars/Navbar.vue";
-import AppFooter from "@/examples/Footer.vue";
-import { mapMutations, mapState } from "vuex";
+<script setup lang="ts">
+	import { onBeforeMount } from 'vue';
+	import { storeToRefs } from 'pinia';
+	import { useUiStore } from '@/stores/useUiStore';
 
-export default {
-  name: "App",
-  components: {
-    Sidenav,
-    Configurator,
-    Navbar,
-    AppFooter,
-  },
-  methods: {
-    ...mapMutations(["toggleConfigurator", "navbarMinimize"]),
-  },
-  computed: {
-    ...mapState([
-      "isRTL",
-      "color",
-      "isAbsolute",
-      "isNavFixed",
-      "navbarFixed",
-      "absolute",
-      "showSidenav",
-      "showNavbar",
-      "showFooter",
-      "showConfig",
-      "hideConfigButton",
-    ]),
-  },
-  beforeMount() {
-    this.$store.state.isTransparent = "bg-transparent";
+	import Header from '@/pages/layout/headers/Header.vue';
+	import Sidebar from '@/pages/layout/sidebars/Sidebar.vue';
+	import Configurator from '@/examples/Configurator.vue';
+	import Footer from '@/pages/layout/footers/Footer.vue';
 
-    const sidenav = document.getElementsByClassName("g-sidenav-show")[0];
+	const uiStore = useUiStore();
 
-    if (window.innerWidth > 1200) {
-      sidenav.classList.add("g-sidenav-pinned");
-    }
-  },
-};
+	const {
+		isRTL,
+		color,
+		isAbsolute,
+		isNavFixed,
+		navbarFixed,
+		absolute,
+		showSidenav,
+		showNavbar,
+		showFooter,
+		showConfig,
+		hideConfigButton,
+	} = storeToRefs(uiStore);
+
+	onBeforeMount(() => {
+		const sidenav = document.getElementsByClassName('g-sidenav-show')[0];
+
+		if (window.innerWidth > 1200 && sidenav) {
+			sidenav.classList.add('g-sidenav-pinned');
+		}
+	});
 </script>
+
+<template>
+	<!-- 왼쪽 사이드 메뉴 바-->
+	<Sidebar
+		v-if="showSidenav"
+		:custom_class="color"
+		:class="[isRTL ? 'fixed-end' : 'fixed-start']"
+	/>
+
+	<main class="main-content position-relative max-height-vh-100 h-100 overflow-x-hidden">
+		<Header
+			:class="[isNavFixed ? navbarFixed : '', isAbsolute ? absolute : '']"
+			:color="isAbsolute ? 'text-white opacity-8' : ''"
+			:minNav="uiStore.navbarMinimize"
+			v-if="showNavbar"
+		/>
+
+		<router-view />
+
+		<Footer v-show="showFooter" />
+
+		<configurator
+			:toggle="uiStore.toggleConfigurator"
+			:class="[showConfig ? 'show' : '', hideConfigButton ? 'd-none' : '']"
+		/>
+	</main>
+</template>

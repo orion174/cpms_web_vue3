@@ -83,12 +83,12 @@
   outline: 0;
 }
 
-// Modal background
+// ConfirmModalForm background
 .modal-backdrop {
   @include overlay-backdrop($zindex-modal-backdrop, $modal-backdrop-bg, $modal-backdrop-opacity);
 }
 
-// Modal header
+// ConfirmModalForm header
 // Top section of the modal w/ title and dismiss
 .modal-header {
   display: flex;
@@ -111,7 +111,7 @@
   line-height: $modal-title-line-height;
 }
 
-// Modal body
+// ConfirmModalForm body
 // Where all modal content resides (sibling of .modal-header and .modal-footer)
 .modal-body {
   position: relative;
