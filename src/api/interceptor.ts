@@ -1,11 +1,13 @@
 import axios from 'axios';
-import type { AxiosResponse, InternalAxiosRequestConfig, AxiosRequestHeaders, } from 'axios';
+import type { AxiosResponse, InternalAxiosRequestConfig, AxiosRequestHeaders, AxiosError } from 'axios';
 
 import { getAccessToken, refreshAccessToken } from './jwt';
-import { tokenError } from './cookie';
 import { openErrorModal } from '@/utils/modal'
-import { ApiResponse } from '@/types/cmmn';
+import type { ApiResponse } from '@/types/cmmn';
 
+interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
+	_retry?: boolean;
+};
 
 // 상태 변수: refresh 중 여부
 let isRefreshing = false;
@@ -13,7 +15,7 @@ let isRefreshing = false;
 // 재시도할 요청들을 저장할 큐
 let failedQueue: ((token: string) => void)[] = [];
 
-const processQueue = (token: string) => {
+const processQueue = (token: string): void => {
     failedQueue.forEach((cb) => cb(token));
     failedQueue = [];
 };
@@ -57,48 +59,56 @@ export const responseInterceptor = async (response: AxiosResponse) => {
 };
 
 // 에러 인터셉터: '401'시 토큰 재발급 (중복 요청 방지 포함)
-export const errorInterceptor = async (error: any) => {
+export const errorInterceptor = async (error: AxiosError<ApiResponse>) => {
 
-    const originalRequest = error.config;
-    const status = error.response?.status;
+	const originalRequest = error.config as CustomAxiosRequestConfig;
 
-    if (status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true;
+	if (!originalRequest) {
+		return Promise.reject(error);
+	}
 
-        // 현재 토큰을 갱신 중인지 여부 확인
-        if (!isRefreshing) {
-            isRefreshing = true; // 동시 여러 요청에서 401이 발생해도 한번만 refresh 요청을 보냄
+	const status = error.response?.status;
+
+	// 현재 토큰을 갱신 중인지 여부 확인
+	if (status === 401 && !originalRequest._retry) {
+		originalRequest._retry = true;
+
+		if (!isRefreshing) {
+			// 동시 여러 요청에서 401이 발생해도 한번만 refresh 요청을 보냄
+			isRefreshing = true;
 
 			const newToken = await refreshAccessToken();
 			isRefreshing = false;
 
 			if (newToken) {
 				processQueue(newToken);
+
 				originalRequest.headers.Authorization = `Bearer ${newToken}`;
 				originalRequest.withCredentials = true;
 
 				return axios.request(originalRequest);
 			}
-        }
+		}
 
-        return new Promise((resolve) => {
-            failedQueue.push((token: string) => {
-                originalRequest.headers.Authorization = `Bearer ${token}`;
-                originalRequest.withCredentials = true;
-                resolve(axios.request(originalRequest));
-            });
-        });
-    }
+		return new Promise((resolve) => {
 
-	const response: ApiResponse | undefined = error.response?.data;
+			failedQueue.push((token: string) => {
+
+				originalRequest.headers.Authorization = `Bearer ${token}`;
+				originalRequest.withCredentials = true;
+
+				resolve(axios.request(originalRequest));
+			});
+		});
+	}
+
+	// 어떠한 이유로든지 토큰 갱신이 실패
+	const response = error.response?.data;
 
 	openErrorModal({
 		errorCode: response?.errorCode ?? '',
-		message: response?.message ?? '알 수 없는 오류가 발생했습니다.',
-		onConfirm: () => {
-			tokenError();
-		},
+		message: response?.message ?? '알 수 없는 오류가 발생했습니다.'
 	});
 
-    return Promise.reject(error);
+	return Promise.reject(error);
 };

@@ -1,7 +1,7 @@
 /* 📁 공통 인터페이스 */
 
 // API 응답 인터페이스
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
     success: boolean;
     data: T;
     message: string;
@@ -9,7 +9,7 @@ export interface ApiResponse<T = any> {
 }
 
 // JPA 페이징 응답 인터페이스
-export interface PageResponse<T = any> {
+export interface PageResponse<T = unknown> {
     content: T[];
     totalElements: number;
     totalPages: number;
@@ -20,7 +20,12 @@ export interface PageResponse<T = any> {
     empty?: boolean;
 }
 
-// 공통 코드 목록 인터페이스
+// 공통 코드 요청 인터페이스
+export interface ReqCmmnCodeDTO {
+	groupCode: string;
+}
+
+// 공통 코드 목록 응답 인터페이스
 export interface ResCmmnCodeDTO {
 	codeId: number;
 	codeNm: string;

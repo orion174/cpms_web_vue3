@@ -1,7 +1,7 @@
 /* 📁 cookie.ts */
 import axios from 'axios';
 
-export const tokenError = () => {
+export const tokenError = (): void => {
 	sessionStorage.clear();
 
 	deleteCookie()

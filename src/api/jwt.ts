@@ -1,8 +1,8 @@
 /* 📁 jwt.ts */
 import axios from "axios";
 
-import { ApiResponse } from '@/types/cmmn';
-import { ResRefreshTokenDTO } from '@/types/login/types';
+import type { ApiResponse } from '@/types/cmmn';
+import type { ResRefreshTokenDTO } from '@/types/login/types';
 
 const ACCESS_KEY = 'accessToken';
 const LOGIN_HISTORY_KEY = 'loginHistoryId';
@@ -34,7 +34,7 @@ export const refreshAccessToken = async (): Promise<string | null> => {
         return null;
 
     } catch (error) {
-		console.warn('refreshAccessToken failed:', error);
+		console.error('refreshAccessToken failed:', error);
         return null;
     }
 };

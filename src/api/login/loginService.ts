@@ -1,6 +1,4 @@
 import axios, { AxiosResponse } from 'axios';
-
-import { openErrorModal } from '@/utils/modal';
 import type { ReqLoginDTO, ResLoginDTO } from '@/types/login/types';
 import type { ApiResponse } from '@/types/cmmn';
 
