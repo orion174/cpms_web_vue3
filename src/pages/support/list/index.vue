@@ -5,7 +5,14 @@
 	import MaterialPagination from '@/components/MaterialPagination.vue';
 	import MaterialPaginationItem from '@/components/MaterialPaginationItem.vue';
 
+	import CompanySelect from '@/components/SelectModule/CompanySelect.vue';
+	import { ref } from 'vue';
 
+	// v-model로 연결할 반응형 변수 (선택한 회사 ID)
+	const selectedCompany = ref(0);
+
+	// 검색 조건으로 사용할 회사 ID (없으면 0)
+	const searchCompanyId = ref(0);
 </script>
 
 <template>
@@ -22,9 +29,14 @@
 					<div class="card-header pb-0">
 						<div class="d-flex justify-content-between flex-wrap align-items-end gap-3">
 							<div class="d-flex flex-wrap align-items-center gap-3">
-								<select class="my-custom-select" style="width: 100px">
-									<option>옵션1</option>
-								</select>
+								<CompanySelect
+									v-model="selectedCompany"
+									:companyId="searchCompanyId"
+									className="my-custom-select"
+									initText="-- 전체 회사 --"
+									style="width: 100px"
+								/>
+
 								<select class="my-custom-select" style="width: 100px">
 									<option>옵션2</option>
 								</select>

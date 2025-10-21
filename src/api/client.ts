@@ -24,8 +24,6 @@ rawAPI.interceptors.request.use(requestInterceptor, errorInterceptor);
 callAPI.interceptors.response.use(responseInterceptor, errorInterceptor);
 rawAPI.interceptors.response.use(responseInterceptor, errorInterceptor);
 
-/* API 호출 헬퍼 */
-
 const get = async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
 	const response = await callAPI.get<ApiResponse<T>>(url, config);
 	return response.data.data;
