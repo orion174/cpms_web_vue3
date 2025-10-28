@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import MaterialAvatar from "@/components/MaterialAvatar.vue";
+import MaterialAvatar from "@/components/BaseModule/MaterialAvatar.vue";
 import { mapState } from "vuex";
 import img1 from "../../assets/img/logos/mastercard.png";
 

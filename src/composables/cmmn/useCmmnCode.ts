@@ -1,23 +1,39 @@
-import { ref, watch, onMounted } from 'vue';
-import { apiClient } from '@/api/client';
-import type { ReqCmmnCodeDTO, ResCmmnCodeDTO } from '@/types/cmmn';
+import { ref, watch, type Ref } from 'vue';
 
-export const useCmmnCode = (groupCode: string) => {
+import { selectCodeList } from '@/api/cmmn/codeService';
+import type { ResCmmnCodeDTO } from '@/types/cmmn';
+
+export const useCmmnCodeOptionsList = (groupCode: Ref<string>) => {
 	const options = ref<ResCmmnCodeDTO[]>([]);
+	const isLoading = ref(false);
+	const error = ref<Error | null>(null);
 
-	const fetchOptions = async (): Promise<void> => {
-		if (!groupCode) return;
+	const fetchCmmnCodes = async(): Promise<void> => {
+		if (!groupCode.value) {
+			options.value = [];
+			return;
+		}
 
-		const response
-			= await apiClient.post<ResCmmnCodeDTO[], ReqCmmnCodeDTO>(
-				'/api/code/list',
-				{ groupCode: groupCode }
-			);
+		isLoading.value = true;
+		error.value = null;
 
-		options.value = response;
+		try {
+			const response
+				= await selectCodeList(groupCode.value);
+
+			options.value = response;
+
+		} catch (e: unknown) {
+			console.error("composables useCmmnCodeOptionsList error : ", e);
+			error.value = e as Error;
+			options.value = [];
+
+		} finally {
+			isLoading.value = false;
+		}
 	};
 
-	watch(() => groupCode, fetchOptions, { immediate: true });
+	watch(() => groupCode, fetchCmmnCodes, { immediate: true});
 
-	return { options };
+	return { options, isLoading, error };
 };

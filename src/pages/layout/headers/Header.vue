@@ -3,7 +3,7 @@
 	import { useRoute } from 'vue-router';
 	import { useUiStore } from '@/stores/useUiStore';
 
-	import MaterialInput from '@/components/MaterialInput.vue';
+	import MaterialInput from '@/components/BaseModule/MaterialInput.vue';
 	import Breadcrumbs from './components/Breadcrumbs.vue';
 	import DropdownMenu from './components/DropdownMenu.vue';
 

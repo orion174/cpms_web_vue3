@@ -3,12 +3,12 @@
 	import { useRouter } from 'vue-router';
 	import axios from 'axios';
 
-	import MaterialSwitch from '@/components/MaterialSwitch.vue';
-	import VerificationInput from '@/components/VerificationInput.vue';
-	import MaterialButton from '@/components/MaterialButton.vue';
+	import MaterialSwitch from '@/components/BaseModule/MaterialSwitch.vue';
+	import VerificationInput from '@/components/BaseModule/VerificationInput.vue';
+	import MaterialButton from '@/components/BaseModule/MaterialButton.vue';
 
 	import { openAlertModal, openErrorModal, openToast } from '@/utils/modal';
-	import { userLogin } from '@/api/login/loginService';
+	import { userLogin } from '@/api/login/service';
 	import type { ReqLoginDTO } from '@/types/login/types';
 
 	const router = useRouter();

@@ -75,7 +75,7 @@
 	import { useUiStore } from '@/stores/useUiStore';
 
 	import Breadcrumbs from '../Breadcrumbs.vue';
-	import MaterialInput from '@/components/MaterialInput.vue';
+	import MaterialInput from '@/components/BaseModule/MaterialInput.vue';
 
 	const props = defineProps({
 		color: String,

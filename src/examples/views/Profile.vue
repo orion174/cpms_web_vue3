@@ -561,8 +561,8 @@
 <script>
 import ProfileInfoCard from "./components/ProfileInfoCard.vue";
 import DefaultProjectCard from "./components/DefaultProjectCard.vue";
-import MaterialSwitch from "@/components/MaterialSwitch.vue";
-import MaterialAvatar from "@/components/MaterialAvatar.vue";
+import MaterialSwitch from "@/components/BaseModule/MaterialSwitch.vue";
+import MaterialAvatar from "@/components/BaseModule/MaterialAvatar.vue";
 import sophie from "@/assets/img/kal-visuals-square.jpg";
 import marie from "@/assets/img/marie.jpg";
 import ivana from "@/assets/img/ivana-square.jpg";

@@ -4,7 +4,7 @@
 
 	interface Props {
 		modelValue: number; // v-model
-		companyId: number; // 검색 필터
+		companyId?: number; // 검색 필터
 		className?: string;
 		initText: string;
 	};
@@ -13,13 +13,17 @@
 	const emit = defineEmits(['update:modelValue']);
 
 	// v-model을 computed로 구현 (Get/Set)
-	const selectedValue = computed({
+	const selectedValue = computed<number | null>({
 		get: () => props.modelValue,
-		set: (value) => emit('update:modelValue', value)
+		set: (val: number | null) => emit('update:modelValue', val === null ? 0 : val)
 	});
 
-	// props.companyId를 Ref 객체로 변환하여 composables에 전달
-	const companyIdRef = toRef(props, 'companyId');
+	// default 값 할당
+	const companyIdRef = computed({
+		get: () => props.companyId ?? 0, // undefined면 0
+		set: (val: number) => {}
+	});
+
 	const { options, isLoading } = useCompanyOptionsList(companyIdRef);
 
 	// 'hasAutoSelected' 상태를 컴포저블이 아닌 컴포넌트가 직접 관리
@@ -43,10 +47,11 @@
 		<option :value="0">{{ initText }}</option>
 
 		<option v-if="isLoading" :value="0" disabled>
-			불러오는 중...
+			 Loading...
 		</option>
 
-		<option v-for="option in options"
+		<option
+			v-for="option in options"
 			:key="option.companyId"
 			:value="option.companyId"
 		>
