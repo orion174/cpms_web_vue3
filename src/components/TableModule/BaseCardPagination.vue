@@ -1,9 +1,6 @@
 <script setup lang="ts">
 	import { computed, defineProps, defineEmits, watch } from 'vue';
 
-	import MaterialPagination from '@/components/BaseModule/MaterialPagination.vue';
-	import MaterialPaginationItem from '@/components/BaseModule/MaterialPaginationItem.vue';
-
 	interface Props {
 		modelValue: number; // 현재 페이지 (v-model)
 		totalCnt: number;

@@ -90,7 +90,7 @@
 	</BaseCardTable>
 
 	<BaseCardPagination
-		v-model:pageNo="searchParams.pageNo"
+		v-model="searchParams.pageNo"
 		:totalCnt="totalCnt"
 		:pageSize="searchParams.pageSize"
 		:maxButtons="5"

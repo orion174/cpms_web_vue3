@@ -87,7 +87,7 @@
 			<td colspan="8" style="height: 48px;"></td>
 		</tr>
 	</template>
-	
+
 	<tr v-else>
 		<td colspan="9" class="text-center align-middle">
 			<h4 class="text-muted">표시할 항목이 없습니다.</h4>
