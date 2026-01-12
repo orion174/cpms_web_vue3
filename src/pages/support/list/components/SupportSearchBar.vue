@@ -5,7 +5,7 @@
 	import MaterialButton from '@/components/BaseModule/MaterialButton.vue';
 	import CmmnCodeSelect from '@/components/SelectModule/CmmnCodeSelect.vue';
 	import CompanySelect from '@/components/SelectModule/CompanySelect.vue';
-	import SupportAddButton from '@/pages/support/list/components/SupportAddButton.vue';
+	import SupportInsertButton from '@/pages/support/list/components/SupportInsertButton.vue';
 
 	import { getUserAuthType, handleEnter } from '@/utils/cmmn';
 	import { ReqSupportListDTO, initParams } from "@/types/support/types";
@@ -49,21 +49,21 @@
 				<CompanySelect
 					v-if="authType === 'ADMIN'"
 					v-model.number="searchParams.searchCompanyId"
-					className="my-custom-select"
+					className="search-select"
 					initText="업체 선택"
 				/>
 
 				<CmmnCodeSelect
 					v-model.number="searchParams.searchRequestCd"
 					groupCode="10"
-					className="my-custom-select"
+					className="search-select"
 					initText="요청 선택"
 				/>
 
 				<CmmnCodeSelect
 					v-model.number="searchParams.searchStatusCd"
 					groupCode="20"
-					className="my-custom-select"
+					className="search-select"
 					initText="처리상태 선택"
 				/>
 
@@ -71,8 +71,8 @@
 					<MaterialInput
 						v-model="searchParams.searchStartDt"
 						id="date"
-						label="등록일"
 						type="date"
+						label="등록일"
 						@keydown="onEnterSearch"
 					/>
 				</div>
@@ -81,8 +81,8 @@
 					<MaterialInput
 						v-model="searchParams.searchTitle"
 						id="title"
-						label="제목"
 						type="text"
+						label="제목"
 						@keydown="onEnterSearch"
 					/>
 				</div>
@@ -101,7 +101,7 @@
 				</MaterialButton>
 			</div>
 
-			<SupportAddButton />
+			<SupportInsertButton />
 
 		</div>
 	</div>

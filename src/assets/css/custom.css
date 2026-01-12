@@ -213,3 +213,75 @@
     max-width: 850px;
     width: 100%;
 }
+
+.my-custom-select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+
+    background-color: #ffffff !important;
+    border: 1px solid #D2D6DA !important;
+    border-radius: 8px !important;
+
+    padding: 12px 40px 12px 14px !important;
+    width: 100% !important;
+
+    font-family: "Pretendard Variable", Pretendard, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #1E1E1E !important;
+
+    background-image: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%235e72e4' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 16px center !important;
+    background-size: 12px !important;
+
+    cursor: pointer !important;
+    line-height: 1.4 !important;
+}
+
+.my-custom-select:focus {
+    border-color: #5E72E4 !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(94, 114, 228, .15) !important;
+}
+
+/* 검색바 전용 셀렉트 */
+.search-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    border: 1px solid #D2D6DA;
+    border-radius: 6px;
+
+    background-color: #ffffff;
+    height: 38px;
+    padding: 6px 32px 6px 10px;
+
+    font-size: 13px;
+    font-weight: 500;
+    color: #1E1E1E;
+
+    background-image: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23666' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+
+    cursor: pointer;
+}
+
+/* focus 효과 */
+.search-select:focus {
+    border-color: #5e72e4;
+    box-shadow: none;
+}
+
+.form-label {
+    font-family: "Pretendard Variable", Pretendard, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #344767; /* 약간 네이비 느낌 */
+    margin-bottom: 6px;
+    display: inline-block;
+}

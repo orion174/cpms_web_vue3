@@ -606,12 +606,12 @@ export default {
   },
 
   mounted() {
-    this.$store.state.isAbsolute = true;
-    setNavPills();
-    setTooltip();
+    // this.$store.state.isAbsolute = true;
+    // setNavPills();
+    // setTooltip();
   },
   beforeUnmount() {
-    this.$store.state.isAbsolute = false;
+    // this.$store.state.isAbsolute = false;
   },
 };
 </script>

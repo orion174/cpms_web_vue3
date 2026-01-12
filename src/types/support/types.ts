@@ -33,12 +33,13 @@ export interface ReqSupportListDTO {
 };
 
 // 문의 등록 인터페이스
-export interface ReqSupportDTO {
+export interface ReqInsertSupportDTO {
 	requestCompanyId: number;
 	requestProjectId: number;
 	requestCd: number;
 	statusCd: number;
 	supportTitle: string;
+	supportEditor: string;
 	requestDate: string;
 };
 
@@ -89,3 +90,13 @@ export const initParams: ReqSupportListDTO = {
 	searchEndDt: '2099-12-31', // 추후 litepicker 모듈 수정예정
 	searchTitle: ''
 }
+
+export const initFormData: ReqInsertSupportDTO = {
+	requestCompanyId: 0,
+	requestProjectId: 0,
+	requestCd: 0,
+	statusCd: 0,
+	requestDate: '',
+	supportTitle: '',
+	supportEditor: '',
+};

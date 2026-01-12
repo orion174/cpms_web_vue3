@@ -1,12 +1,12 @@
 <script setup lang="ts">
-	import { useRouter } from 'vue-router';
-	import { tokenError } from '@/api/cookie';
+	import { tokenError } from '@/api/auth/cookie';
 
-	defineProps<{ show: boolean; }>();
+	defineProps<{
+		show: boolean;
+	}>();
 
 	const logout = () => {
 		tokenError();
-		router.push('/login');
 	};
 </script>
 

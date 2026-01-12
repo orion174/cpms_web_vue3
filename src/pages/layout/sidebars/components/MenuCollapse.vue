@@ -1,12 +1,11 @@
 <script setup lang="ts">
-	import { ref } from 'vue';
+	import { ref, computed } from 'vue';
 	import { useRoute } from 'vue-router';
 	import { storeToRefs } from 'pinia';
-
 	import { useUiStore } from '@/stores/useUiStore';
 
-	defineProps<{
-		collapseRef: string;
+	const props = defineProps<{
+		to: string;
 		navText: string;
 		collapse?: boolean;
 	}>();
@@ -17,20 +16,19 @@
 
 	const isExpanded = ref(false);
 
-	const getRoute = () => {
-		const routeArr = route.path.split('/');
-		return routeArr[1];
-	};
+	// 현재 경로가 활성 메뉴인지 계산
+	const isActive = computed(() => {
+		return route.path.startsWith(props.to);
+	});
 </script>
 
 <template>
 	<router-link
 		:data-bs-toggle="collapse ? 'collapse' : ''"
-		:to="collapse ? `#${collapseRef}` : collapseRef"
-		:aria-controls="collapseRef"
+		:to="to"
 		:aria-expanded="isExpanded"
 		class="nav-link"
-		:class="getRoute() === collapseRef ? `active bg-gradient-${color}` : ''"
+		:class="isActive ? `active bg-gradient-${color}` : ''"
 		v-bind="$attrs"
 		@click="isExpanded = !isExpanded"
 	>
@@ -40,7 +38,7 @@
 		<span class="nav-link-text" :class="isRTL ? ' me-1' : 'ms-1'">{{ navText }}</span>
 	</router-link>
 
-	<div :class="isExpanded ? 'collapse show' : 'collapse'">
+	<div v-if="collapse" :class="isExpanded ? 'collapse show' : 'collapse'">
 		<slot name="list"></slot>
 	</div>
 </template>

@@ -1,4 +1,3 @@
-/* 📁 cookie.ts */
 import axios from 'axios';
 
 export const tokenError = (): void => {
@@ -14,15 +13,15 @@ export const tokenError = (): void => {
 // 쿠키 삭제
 const deleteCookie = async (): Promise<void> => {
 	try {
-        await axios.post(
-            `${import.meta.env.VITE_API_URL}/api/cookie/delete`
-            , null
-            , {
+		await axios.post(
+			`${import.meta.env.VITE_API_URL}/api/cookie/delete`
+			, null
+			, {
 				headers: { 'Content-Type': 'application/json' }
 				, withCredentials: true
 			}
-        );
-    } catch (error) {
+		);
+	} catch (error) {
 		console.warn('deleteCookie failed:', error);
-    }
+	}
 };

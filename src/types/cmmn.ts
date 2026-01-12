@@ -47,3 +47,7 @@ export interface NewFileItem  {
 }
 
 export type FileItem = ExistingFileItem | NewFileItem;
+
+// 타입가드 코드
+export const isNewFileItem = (f: FileItem): f is NewFileItem =>
+	(f as NewFileItem).isNew === true && !!(f as NewFileItem).file;

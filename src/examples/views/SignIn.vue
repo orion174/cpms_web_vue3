@@ -119,7 +119,7 @@
 	import MaterialInput from '@/components/BaseModule/MaterialInput.vue';
 	import MaterialSwitch from '@/components/BaseModule/MaterialSwitch.vue';
 	import MaterialButton from '@/components/BaseModule/MaterialButton.vue';
-	import { mapMutations } from 'vuex';
+	// import { mapMutations } from 'vuex';
 
 	export default {
 		name: 'sign-in',
@@ -130,15 +130,15 @@
 			MaterialButton,
 		},
 		beforeMount() {
-			this.toggleEveryDisplay();
-			this.toggleHideConfig();
+			//this.toggleEveryDisplay();
+			//this.toggleHideConfig();
 		},
 		beforeUnmount() {
-			this.toggleEveryDisplay();
-			this.toggleHideConfig();
+			//this.toggleEveryDisplay();
+			//this.toggleHideConfig();
 		},
 		methods: {
-			...mapMutations(['toggleEveryDisplay', 'toggleHideConfig']),
+			// ...mapMutations(['toggleEveryDisplay', 'toggleHideConfig']),
 		},
 	};
 </script>

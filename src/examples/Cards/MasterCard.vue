@@ -41,7 +41,7 @@
 
 <script>
 import MaterialAvatar from "@/components/BaseModule/MaterialAvatar.vue";
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 import img1 from "../../assets/img/logos/mastercard.png";
 
 const bgImage = new URL('@/assets/img/curved14.jpg', import.meta.url).href;
@@ -76,7 +76,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isRTL"]),
+    // ...mapState(["isRTL"]),
   },
 };
 </script>

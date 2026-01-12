@@ -1,4 +1,4 @@
-\<script setup lang="ts">
+<script setup lang="ts">
 	import { storeToRefs } from 'pinia';
 	import { useUiStore } from '@/stores/useUiStore';
 
@@ -24,7 +24,7 @@
 				id="iconSidenav"
 			></i>
 			<!-- 사이드바 로고 영역 -->
-			<a class="m-0 navbar-brand" href="/support">
+			<a class="m-0 navbar-brand" href="/support/list">
 				<img
 					:src="
 						sidebarType === 'bg-white' || (sidebarType === 'bg-transparent' && !isDarkMode)
@@ -34,7 +34,7 @@
 					class="navbar-brand-img h-100"
 					alt="main_logo"
 				/>
-				<span class="ms-2 font-weight-bold text-white">TEMP LOGO AREA</span>
+				<span class="ms-2 font-weight-bold text-white">LOGO</span>
 			</a>
 		</div>
 

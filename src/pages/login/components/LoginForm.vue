@@ -1,74 +1,23 @@
 <script setup lang="ts">
 	import { ref } from 'vue';
-	import { useRouter } from 'vue-router';
-	import axios from 'axios';
-
-	import MaterialSwitch from '@/components/BaseModule/MaterialSwitch.vue';
 	import VerificationInput from '@/components/BaseModule/VerificationInput.vue';
 	import MaterialButton from '@/components/BaseModule/MaterialButton.vue';
-
-	import { openAlertModal, openErrorModal, openToast } from '@/utils/modal';
-	import { userLogin } from '@/api/login/service';
-	import type { ReqLoginDTO } from '@/types/login/types';
-
-	const router = useRouter();
+	import { useAuth } from '@/composables/auth/useAuth';
 
 	const loginId = ref('');
 	const loginPw = ref('');
 	const idErrorFlag = ref(false);
 	const pwErrorFlag = ref(false);
 
+	const { login, isLoading } = useAuth();
+
 	const handleLogin = async () => {
-		idErrorFlag.value = false;
-		pwErrorFlag.value = false;
-
-		if (!loginId.value) {
-			idErrorFlag.value = true;
-		}
-
-		if (!loginPw.value) {
-			pwErrorFlag.value = true;
-		}
+		idErrorFlag.value = !loginId.value;
+		pwErrorFlag.value = !loginPw.value;
 
 		if (idErrorFlag.value || pwErrorFlag.value) return;
 
-		const jsonData: ReqLoginDTO = {
-			loginId: loginId.value
-			, loginPw: loginPw.value
-		};
-
-		try {
-			const response = await userLogin(jsonData);
-			const { success, message, data } = response.data;
-
-			if (success && data?.accessToken) {
-				sessionStorage.setItem('accessToken', data.accessToken);
-				sessionStorage.setItem('accessExp', String(data.accessTokenExpiration));
-				sessionStorage.setItem('loginHistoryId', String(data.loginHistoryId));
-
-				openToast(message, 'success');
-				router.push('/support');
-
-			} else {
-				openAlertModal({
-					title: '알림',
-					message: message ?? '로그인 실패',
-				});
-			}
-		} catch (error: any) {
-			if (axios.isAxiosError(error)) {
-				openErrorModal({
-					errorCode: error.response?.data?.errorCode ?? '',
-					message: error.response?.data?.message ?? '로그인 중 오류가 발생했습니다.',
-				});
-
-			} else {
-				openAlertModal({
-					title: '알림',
-					message: '알 수 없는 에러가 발생했습니다.',
-				});
-			}
-		}
+		await login(loginId.value, loginPw.value);
 	};
 </script>
 
@@ -95,9 +44,9 @@
 			/>
 		</div>
 
-		<MaterialSwitch id="rememberMe" name="rememberMe">
-			Remember me
-		</MaterialSwitch>
+<!--		<MaterialSwitch id="rememberMe" name="rememberMe">-->
+<!--			Remember me-->
+<!--		</MaterialSwitch>-->
 
 		<div class="text-center">
 			<MaterialButton
@@ -108,7 +57,7 @@
 				fullWidth
 				@click="handleLogin"
 			>
-				Login
+				{{ isLoading ? 'Loading...' : 'Login' }}
 			</MaterialButton>
 		</div>
 	</form>

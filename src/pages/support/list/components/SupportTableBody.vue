@@ -84,7 +84,7 @@
 		</tr>
 		<!-- 빈 행 채우기 (10줄 유지) -->
 		<tr v-for="n in Math.max(0, 10 - list.length)" :key="'empty-' + n">
-			<td colspan="8" style="height: 48px;"></td>
+			<td colspan="9" style="height: 48px;"></td>
 		</tr>
 	</template>
 

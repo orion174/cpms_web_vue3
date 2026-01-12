@@ -1,17 +1,14 @@
 import { apiClient } from '@/api/client';
 import type { ResCompanyListDTO } from '@/types/company/types';
 
-export const selectCompanyList = async (
-	companyId: number
-):Promise<ResCompanyListDTO[]> => {
-	const url = '/api/setting/company/list';
+export const companyService = {
+	async getCompanyList(companyId: number): Promise<ResCompanyListDTO[]> {
+		const response = await apiClient.get<ResCompanyListDTO[]>(
+			'/api/setting/company/list', {
+				params: { companyId },
+			},
+		);
 
-	const response = await apiClient.get<ResCompanyListDTO[]>(
-		url,
-		{
-			params: { companyId: companyId }
-		}
-	);
-
-	return response ?? [];
+		return response ?? [];
+	},
 };

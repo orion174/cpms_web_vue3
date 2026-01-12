@@ -115,7 +115,7 @@ import MaterialInput from "@/components/BaseModule/MaterialInput.vue";
 import MaterialCheckbox from "@/components/BaseModule/MaterialCheckbox.vue";
 import MaterialButton from "@/components/BaseModule/MaterialButton.vue";
 const body = document.getElementsByTagName("body")[0];
-import { mapMutations } from "vuex";
+// import { mapMutations } from "vuex";
 
 export default {
   name: "sign-up",
@@ -131,17 +131,17 @@ export default {
     };
   },
   beforeMount() {
-    this.toggleEveryDisplay();
-    this.toggleHideConfig();
+    // this.toggleEveryDisplay();
+    // this.toggleHideConfig();
     body.classList.remove("bg-gray-100");
   },
   beforeUnmount() {
-    this.toggleEveryDisplay();
-    this.toggleHideConfig();
+    // this.toggleEveryDisplay();
+    // this.toggleHideConfig();
     body.classList.add("bg-gray-100");
   },
   methods: {
-    ...mapMutations(["toggleEveryDisplay", "toggleHideConfig"]),
+    // ...mapMutations(["toggleEveryDisplay", "toggleHideConfig"]),
   },
 };
 </script>

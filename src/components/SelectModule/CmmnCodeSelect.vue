@@ -1,11 +1,11 @@
 <script setup lang="ts">
-	import { computed, toRef } from 'vue';
+	import { watch, computed, toRef } from 'vue';
 	import { useCmmnCodeOptionsList } from '@/composables/cmmn/useCmmnCode';
-	import type { ResCmmnCodeDTO } from '@/types/cmmn';
 
 	interface Props {
-		modelValue: number | null; // v-model
-		groupCode: string; // 공통코드 그룹
+		modelValue: number | null;
+		groupCode: string;
+		defaultValue?: number | null;
 		className?: string;
 		initText: string;
 	};
@@ -13,16 +13,20 @@
 	const props = defineProps<Props>();
 	const emit = defineEmits(['update:modelValue']);
 
-	// v-model을 computed로 구현 (Get/Set)
-	const selectedValue = computed<number | null>({
+	const groupCodeRef = toRef(props, 'groupCode')
+
+	const { options, isLoading, error } = useCmmnCodeOptionsList(groupCodeRef);
+
+	const selectedValue = computed<number>({
 		get: () => props.modelValue,
-		// v-model 값을 업데이트
-		set: (value: number | null) => emit('update:modelValue', value)
+		set: (value) => emit('update:modelValue', value || 0)
 	});
 
-	// 공통코드 리스트를 가져오는 부분
-	// useCmmnCodeOptionsList가 Ref<ResCmmnCodeDTO[]>를 반환한다고 가정한다.
-	const { options, isLoading, error } = useCmmnCodeOptionsList(toRef(props, 'groupCode'));
+	watch(options, (newOpts) => {
+		if (newOpts.length > 0 && !props.modelValue && props.defaultValue) {
+			emit("update:modelValue", props.defaultValue);
+		}
+	});
 </script>
 
 <template>
@@ -31,26 +35,18 @@
 		:class="className"
 		:disabled="isLoading || !!error"
 	>
-		<option :value="0">{{ initText }}</option>
+		<option :value="0">{{ isLoading ? '로딩 중...' : initText }}</option>
 
-		<template v-if="isLoading && options.length === 0">
-			<option :value="0" disabled>Loading...</option>
-		</template>
+		<option v-if="error" disabled>데이터를 불러오지 못했습니다.</option>
 
-		<template v-else-if="error">
-			<option :value="0" disabled>error!</option>
-		</template>
-
-		<template v-else-if="options.length === 0">
-			<option :value="0" disabled>empty...</option>
-		</template>
+		<option v-else-if="!isLoading && options.length === 0" disabled>조회된 데이터가 없습니다.</option>
 
 		<option
 			v-for="option in options"
-			:key="(option as ResCmmnCodeDTO).codeId"
-			:value="(option as ResCmmnCodeDTO).codeId"
+			:key="option.codeId"
+			:value="option.codeId"
 		>
-			{{ (option as ResCmmnCodeDTO).codeNm }}
+			{{ option.codeNm }}
 		</option>
 	</select>
 </template>
